@@ -6,12 +6,15 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 21:21:42 by skoudad           #+#    #+#             */
-/*   Updated: 2026/01/17 21:50:40 by skoudad          ###   ########.fr       */
+/*   Updated: 2026/01/22 21:29:26 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# include "libft.h"
+# include "get_next_line.h"
 
 // # include <mlx.h>
 // # include <mlx_int.h>
@@ -38,15 +41,24 @@ typedef enum e_direction{
 	S,
 	E,
 	W,
-};
+} s_direction;
 
-typedef struct t_data {
-	char **textures;
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_color;
 
-} s_data ;
+typedef struct s_data {
+	char	*textures[4];
+	t_color	floor;
+	t_color	ceiling;
 
+} t_data ;
 
-int	parsing(s_data *data, char *path);
+void	ft_str(char *str);
+int		parsing(t_data *data, char *path);
 
 
 #endif
