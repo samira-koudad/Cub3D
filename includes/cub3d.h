@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 21:21:42 by skoudad           #+#    #+#             */
-/*   Updated: 2026/01/22 21:29:26 by skoudad          ###   ########.fr       */
+/*   Updated: 2026/01/23 22:24:40 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_data {
 
 void	ft_str(char *str);
 int		parsing(t_data *data, char *path);
+int	ft_strslen(char **strs);
 
 
 #endif

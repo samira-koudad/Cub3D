@@ -4,7 +4,7 @@
 
 NAME			= cub3D
 CC				= gcc
-CFLAGS			= -Wall -Wextra
+CFLAGS			= -Wall -Wextra -g
 INCLUDES		= -I./includes -I./libft -I./gnl
 RM				= rm -f
 
@@ -45,7 +45,7 @@ $(NAME): $(LIBFT_NAME) $(OBJECTS) $(GNL_OBJECTS)
 
 # LIBFT Rules (uses libft's own makefile)
 $(LIBFT_NAME):
-	@make -C $(LIBFT_DIR) bonus
+	@make -C $(LIBFT_DIR)
 	@echo "✓ libft compiled!"
 
 # GET_NEXT_LINE Rules
