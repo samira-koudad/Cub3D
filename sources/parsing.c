@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 00:00:00 by skoudad           #+#    #+#             */
-/*   Updated: 2026/01/25 16:13:58 by skoudad          ###   ########.fr       */
+/*   Updated: 2026/01/25 20:07:04 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int check_texture(t_data *data, int fd)
 	char	*line;
 	char	**strs;
 
-	while (!check_empty(data->textures, 4))
+	while (!check_empty(data->textures, 4) || data->floor.r == -1 || data->ceiling.r == -1)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -110,15 +110,28 @@ int check_texture(t_data *data, int fd)
 			if (parse_texture_line(data, strs[1], W))
 				return (puts("side W"), 1);
 		}
+		else if (!ft_strcmp(strs[0], "F"))
+		{
+			if(put_color(&data->floor, strs[1]))
+				return (puts("err 1"), 1);
+		}
+		else if (!ft_strcmp(strs[0], "C"))
+		{
+			if(put_color(&data->ceiling, strs[1]))
+				return (puts("err 2"), 1);
+		}
 		else
 			return (1);
-		puts("\n\ndata:");
-		for (int a = 0; a < 4; a++)
-			printf("%d: %s\n", a, data->textures[a]);
 	}
 	if (!check_empty(data->textures, 4))
 		return (1);
 	// while (1)
+	puts("\n\ndata:");
+	for (int a = 0; a < 4; a++)
+		printf("%d: %s\n", a, data->textures[a]);
+	printf("floor %d %d %d\n", data->floor.r, data->floor.g, data->floor.b);
+	printf("ceiling %d %d %d\n", data->ceiling.r, data->ceiling.g, data->ceiling.b);
+
 	// {
 	// 	line = get_next_line(fd);
 	// 	if (!line)
@@ -154,12 +167,12 @@ int	parsing(t_data *data, char *path)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (puts("err1"),1);
+	data->ceiling.r = -1;
+	data->floor.r = -1;
 	if (check_texture(data, fd)) //using gnl
-		return (puts("err 2"),1);
-	if (check_floor_ceiling(data, fd)) //using gnl
-		return (puts("err3"),1);
-	// if (check_map(fd)) //using gnl
-	// 	return (1);
+		return (puts("err2"),1);
+	if (check_map(data, fd)) //using gnl
+		return (1);
 	close(fd);
 
 

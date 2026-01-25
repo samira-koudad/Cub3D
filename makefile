@@ -23,7 +23,8 @@ GNL_DIR			= gnl
 
 SOURCES			= $(SOURCES_DIR)/main.c \
 				  $(SOURCES_DIR)/parsing.c \
-				   $(SOURCES_DIR)/pars.c
+				   $(SOURCES_DIR)/pars.c \
+				   $(SOURCES_DIR)/maps.c
 
 OBJECTS			= $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 

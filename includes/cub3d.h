@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 21:21:42 by skoudad           #+#    #+#             */
-/*   Updated: 2026/01/25 16:02:53 by skoudad          ###   ########.fr       */
+/*   Updated: 2026/01/25 19:58:56 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 
 typedef enum e_direction{
 	N,
-	S,
 	E,
+	S,
 	W,
 } s_direction;
 
@@ -50,17 +50,34 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
+typedef struct s_player
+{
+	float x;
+	float y;
+	float orientation;
+}	t_player;
+
+typedef struct s_line {
+	char	*str;
+	struct s_line *next;
+
+} t_line ;
+
 typedef struct s_data {
 	char	*textures[4];
 	t_color	floor;
 	t_color	ceiling;
+	char **map;
+	t_player player;
+	t_line *beggin;
 
 } t_data ;
+
 
 void	ft_str(char *str);
 int		parsing(t_data *data, char *path);
 int	ft_strslen(char **strs);
-int check_floor_ceiling(t_data *data, int fd);
 int	put_color(t_color *color, char *floorc);
+int check_map(t_data *data, int fd);
 
 #endif
