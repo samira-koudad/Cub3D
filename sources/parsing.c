@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 00:00:00 by skoudad           #+#    #+#             */
-/*   Updated: 2026/01/23 23:09:36 by skoudad          ###   ########.fr       */
+/*   Updated: 2026/01/25 16:13:58 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,11 +153,11 @@ int	parsing(t_data *data, char *path)
 		return (1);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (1);
+		return (puts("err1"),1);
 	if (check_texture(data, fd)) //using gnl
-		return (1);
+		return (puts("err 2"),1);
 	if (check_floor_ceiling(data, fd)) //using gnl
-	// 	return (1);
+		return (puts("err3"),1);
 	// if (check_map(fd)) //using gnl
 	// 	return (1);
 	close(fd);

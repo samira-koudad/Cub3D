@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 21:21:42 by skoudad           #+#    #+#             */
-/*   Updated: 2026/01/23 22:24:40 by skoudad          ###   ########.fr       */
+/*   Updated: 2026/01/25 16:02:53 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_data {
 void	ft_str(char *str);
 int		parsing(t_data *data, char *path);
 int	ft_strslen(char **strs);
-
+int check_floor_ceiling(t_data *data, int fd);
+int	put_color(t_color *color, char *floorc);
 
 #endif
