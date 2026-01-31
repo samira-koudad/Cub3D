@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 21:21:42 by skoudad           #+#    #+#             */
-/*   Updated: 2026/01/25 19:58:56 by skoudad          ###   ########.fr       */
+/*   Updated: 2026/01/31 18:30:31 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 # include <readline/history.h>
 # include <stdbool.h>
 # include <limits.h>
-
+// S in NESW
+// return 2
 typedef enum e_direction{
 	N,
 	E,
@@ -55,6 +56,7 @@ typedef struct s_player
 	float x;
 	float y;
 	float orientation;
+	int spawn_orientation;
 }	t_player;
 
 typedef struct s_line {
@@ -79,5 +81,6 @@ int		parsing(t_data *data, char *path);
 int	ft_strslen(char **strs);
 int	put_color(t_color *color, char *floorc);
 int check_map(t_data *data, int fd);
+char **map_table(t_line *curr);
 
 #endif

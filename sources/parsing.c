@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 00:00:00 by skoudad           #+#    #+#             */
-/*   Updated: 2026/01/25 20:07:04 by skoudad          ###   ########.fr       */
+/*   Updated: 2026/01/31 18:30:56 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,9 +172,8 @@ int	parsing(t_data *data, char *path)
 	if (check_texture(data, fd)) //using gnl
 		return (puts("err2"),1);
 	if (check_map(data, fd)) //using gnl
-		return (1);
+		return (puts("err3"), 1);
 	close(fd);
-
 
 	return (0);
 }

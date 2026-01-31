@@ -6,7 +6,7 @@
 /*   By: skoudad <skoudad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 16:51:28 by skoudad           #+#    #+#             */
-/*   Updated: 2026/01/25 19:39:54 by skoudad          ###   ########.fr       */
+/*   Updated: 2026/01/31 18:45:14 by skoudad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	verify_map(char **table)
 	int	j;
 
 	i = 0;
-	while (table[i][j])
+	while (table[i])
 	{
 		j = 0;
 		while (table[i][j])
@@ -99,6 +99,57 @@ int	verify_map(char **table)
 	}
 	return (0);
 }
+
+int is_in(char *c, char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+// check qu'on a 1 joueur (N/S/E/W) only et uniquement 0 / 1 / space
+int check_map_content(char **map, t_data *data)
+{
+	int	i;
+	int	j;
+	int	pos;
+
+	i = 0;
+	pos = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (is_in(map[i][j], "01NESW \f\t\r\v") == -1)
+				return (1);
+			if (is_in(map[i][j], "NESW") != -1)
+			{
+				data->player.spawn_orientation = is_in(map[i][j], "NESW");
+				data->player.x = (float)j;
+				data->player.y = (float)i;
+				map[i][j] = '0';
+				pos++;
+			}
+			else if (is_in(map[i][j], " \f\t\r\v"))
+				map[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+	if (pos == 1)
+		return (0);
+	return (1);
+}
+
+
 
 int check_map(t_data *data, int fd)
 {
@@ -122,5 +173,12 @@ int check_map(t_data *data, int fd)
 			previous_line->next = current_line;
 		previous_line = current_line;
 	}
+	data->map = map_table(data->beggin);
+	if (!data->map)
+		return (1); // free la liste chainée
+	if (check_map_content(data->map, data))
+		return (1); // free la liste chainée
+	if (check_map_closed(data->map))
+		return (1); // free la liste chainée
 	return (0);
 }
